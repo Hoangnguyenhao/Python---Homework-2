@@ -1,5 +1,5 @@
-def calculate(a: float, b: float, operator: str) -> float:
-    match operator:
+def calculate(a: float, b: float, op: str):
+    match op:
         case '+':
             return a + b
         case '-':
@@ -7,25 +7,19 @@ def calculate(a: float, b: float, operator: str) -> float:
         case '*':
             return a * b
         case '/':
-            if b == 0:
-                raise ZeroDivisionError("Cannot divide by zero.")
-            return a / b
+            return 'Error: Division by zero' if b == 0 else a / b
         case _:
-            raise ValueError(f"Invalid operator: {operator}")
+            return 'Invalid operation'
 
 def main():
     try:
-        a = float(input("Enter the first number: "))
-        b = float(input("Enter the second number: "))
-        operator = input("Enter operator (+, -, *, /): ").strip()
+        x = float(input("Enter first number: ").strip())
+        y = float(input("Enter second number: ").strip())
+        op = input("Enter operation (+ - * /): ").strip()
+        result = calculate(x, y, op)
+        print(f"Result: {result}")
+    except Exception:
+        print("Invalid input.")
 
-        result = calculate(a, b, operator)
-        print(f"Result: {a} {operator} {b} = {result:.2f}")
-
-    except ValueError as ve:
-        print("Error:", ve)
-    except ZeroDivisionError as zde:
-        print("Error:", zde)
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
